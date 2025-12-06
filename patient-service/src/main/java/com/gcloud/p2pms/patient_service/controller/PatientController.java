@@ -4,12 +4,12 @@ import com.gcloud.p2pms.patient_service.dto.PatientRequestDto;
 import com.gcloud.p2pms.patient_service.dto.PatientResponseDto;
 import com.gcloud.p2pms.patient_service.dto.validators.CreatePatientValidationGroup;
 import com.gcloud.p2pms.patient_service.model.Patient;
+import com.gcloud.p2pms.patient_service.repository.PatientRepository;
 import com.gcloud.p2pms.patient_service.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
-import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +19,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/patients")
-@AllArgsConstructor
 @Tag(name = "Patient", description = "API for managing patients")
 public class PatientController {
     private PatientService patientService;
+
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
+    }
 
     @GetMapping
     @Operation(summary = "Get Patients")
