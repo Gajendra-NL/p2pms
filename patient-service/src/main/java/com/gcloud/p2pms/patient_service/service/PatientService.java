@@ -3,12 +3,15 @@ package com.gcloud.p2pms.patient_service.service;
 import com.gcloud.p2pms.patient_service.dto.PatientRequestDto;
 import com.gcloud.p2pms.patient_service.dto.PatientResponseDto;
 import com.gcloud.p2pms.patient_service.exception.EmailAlreadyExistsException;
+import com.gcloud.p2pms.patient_service.exception.ResourceNotFoundException;
 import com.gcloud.p2pms.patient_service.mapper.PatientMapper;
 import com.gcloud.p2pms.patient_service.model.Patient;
 import com.gcloud.p2pms.patient_service.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PatientService {
@@ -32,5 +35,30 @@ public class PatientService {
 
         Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDto));
         return PatientMapper.toDTO(newPatient);
+    }
+
+    public PatientResponseDto updatePatient(UUID id, PatientRequestDto patientRequestDto) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with ID: " + id));
+
+        if(patientRepository.existsByEmailAndIdNot(patientRequestDto.getEmail(), id)) {
+            throw new EmailAlreadyExistsException("Email already exists" + patientRequestDto.getEmail());
+        }
+
+        patient.setName(patientRequestDto.getName());
+        patient.setEmail(patientRequestDto.getEmail());
+        patient.setAddress(patientRequestDto.getAddress());
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDto.getDateOfBirth()));
+
+        Patient updatePatient = patientRepository.save(patient);
+
+        return PatientMapper.toDTO(updatePatient);
+    }
+
+    public void deletePatient(UUID id) {
+        patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with ID: " + id));
+
+        patientRepository.deleteById(id);
     }
 }
