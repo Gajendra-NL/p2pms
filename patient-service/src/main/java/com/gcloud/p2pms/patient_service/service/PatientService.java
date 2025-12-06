@@ -2,6 +2,7 @@ package com.gcloud.p2pms.patient_service.service;
 
 import com.gcloud.p2pms.patient_service.dto.PatientRequestDto;
 import com.gcloud.p2pms.patient_service.dto.PatientResponseDto;
+import com.gcloud.p2pms.patient_service.exception.EmailAlreadyExistsException;
 import com.gcloud.p2pms.patient_service.mapper.PatientMapper;
 import com.gcloud.p2pms.patient_service.model.Patient;
 import com.gcloud.p2pms.patient_service.repository.PatientRepository;
@@ -25,6 +26,10 @@ public class PatientService {
     }
 
     public PatientResponseDto createPatient(PatientRequestDto patientRequestDto) {
+        if(patientRepository.existsByEmail(patientRequestDto.getEmail())) {
+            throw new EmailAlreadyExistsException("Email already exists" + patientRequestDto.getEmail());
+        }
+
         Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDto));
         return PatientMapper.toDTO(newPatient);
     }
