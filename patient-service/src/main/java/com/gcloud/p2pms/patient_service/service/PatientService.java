@@ -5,6 +5,7 @@ import com.gcloud.p2pms.patient_service.dto.PatientResponseDto;
 import com.gcloud.p2pms.patient_service.exception.EmailAlreadyExistsException;
 import com.gcloud.p2pms.patient_service.exception.ResourceNotFoundException;
 import com.gcloud.p2pms.patient_service.grpc.BillingServiceGrpcClient;
+import com.gcloud.p2pms.patient_service.kafka.KafkaProducer;
 import com.gcloud.p2pms.patient_service.mapper.PatientMapper;
 import com.gcloud.p2pms.patient_service.model.Patient;
 import com.gcloud.p2pms.patient_service.repository.PatientRepository;
@@ -16,12 +17,14 @@ import java.util.UUID;
 
 @Service
 public class PatientService {
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
+    private final KafkaProducer kafkaProducer;
 
-    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
+    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient, KafkaProducer kafkaProducer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
+        this.kafkaProducer = kafkaProducer;
     }
 
     public List<PatientResponseDto> getPatients() {
@@ -39,6 +42,8 @@ public class PatientService {
         Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDto));
 
         billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(), newPatient.getName(), newPatient.getEmail());
+
+        kafkaProducer.sendEvent(newPatient);
 
         return PatientMapper.toDTO(newPatient);
     }
