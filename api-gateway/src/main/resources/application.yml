@@ -2,17 +2,25 @@ server:
   port: 4004
 
 management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
   endpoint:
     gateway:
       enabled: true
-    endpoints:
-      web:
-        exposure:
-          include: gateway
 
 spring:
   cloud:
     gateway:
+      default-filters:
+        - PreserveHostHeader
+
+      discovery:
+        locator:
+          enabled: false
+
       routes:
         - id: patient-service-route
           uri: http://patient-service:4000
