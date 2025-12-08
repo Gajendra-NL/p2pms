@@ -2,6 +2,7 @@ package com.gcloud.p2pms.auth_service.service;
 
 import com.gcloud.p2pms.auth_service.dto.LoginRequestDto;
 import com.gcloud.p2pms.auth_service.util.JwtUtil;
+import io.jsonwebtoken.JwtException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.gcloud.p2pms.auth_service.model.User;
@@ -27,5 +28,14 @@ public class AuthService {
                 .map(u -> jwtUtil.generateToken(u.getEmail(), u.getRole()));
 
         return token;
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            jwtUtil.validateToken(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
     }
 }
