@@ -1129,7 +1129,7 @@
                   "brokerAzDistribution": "DEFAULT"
                 },
                 "clusterName": "p2pms-kafka-cluster",
-                "kafkaVersion": "2.8.0",
+                "kafkaVersion": "3.8.0",
                 "numberOfBrokerNodes": 1
               }
             },
@@ -2779,12 +2779,12 @@
                         },
                         "environment": [
                           {
-                            "name": "AUTH_SERVICE_URL",
-                            "value": "http://host.docker.internal.4005"
-                          },
-                          {
                             "name": "SPRING_PROFILES_ACTIVE",
                             "value": "prod"
+                          },
+                          {
+                            "name": "AUTH_SERVICE_URL",
+                            "value": "http://host.docker.internal.4005"
                           }
                         ]
                       }
