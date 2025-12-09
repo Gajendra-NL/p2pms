@@ -1,1 +1,679 @@
-{}
+{
+ "Resources": {
+  "P2pmsVPC332F52F5": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "P2pmsVPC"
+     }
+    ]
+   }
+  },
+  "P2pmsVPCPublicSubnet1SubnetF36757D0": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPublicSubnet1RouteTableFC2810A1": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPublicSubnet1RouteTableAssociation7019616D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPublicSubnet1RouteTableFC2810A1"
+    },
+    "SubnetId": {
+     "Ref": "P2pmsVPCPublicSubnet1SubnetF36757D0"
+    }
+   }
+  },
+  "P2pmsVPCPublicSubnet1DefaultRoute03867C94": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "P2pmsVPCIGWA6AB69F6"
+    },
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPublicSubnet1RouteTableFC2810A1"
+    }
+   },
+   "DependsOn": [
+    "P2pmsVPCVPCGWA8333946"
+   ]
+  },
+  "P2pmsVPCPublicSubnet1EIP3A2CAF38": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "P2pmsVPCPublicSubnet1NATGateway3AA15B67": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "P2pmsVPCPublicSubnet1EIP3A2CAF38",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "P2pmsVPCPublicSubnet1SubnetF36757D0"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "P2pmsVPCPublicSubnet1DefaultRoute03867C94",
+    "P2pmsVPCPublicSubnet1RouteTableAssociation7019616D"
+   ]
+  },
+  "P2pmsVPCPublicSubnet2Subnet9A834429": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPublicSubnet2RouteTable27365DDA": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPublicSubnet2RouteTableAssociationAEB875BC": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPublicSubnet2RouteTable27365DDA"
+    },
+    "SubnetId": {
+     "Ref": "P2pmsVPCPublicSubnet2Subnet9A834429"
+    }
+   }
+  },
+  "P2pmsVPCPublicSubnet2DefaultRouteA9D39A92": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "P2pmsVPCIGWA6AB69F6"
+    },
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPublicSubnet2RouteTable27365DDA"
+    }
+   },
+   "DependsOn": [
+    "P2pmsVPCVPCGWA8333946"
+   ]
+  },
+  "P2pmsVPCPublicSubnet2EIP2C11E811": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "P2pmsVPCPublicSubnet2NATGatewayC8667B37": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "P2pmsVPCPublicSubnet2EIP2C11E811",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "P2pmsVPCPublicSubnet2Subnet9A834429"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "P2pmsVPCPublicSubnet2DefaultRouteA9D39A92",
+    "P2pmsVPCPublicSubnet2RouteTableAssociationAEB875BC"
+   ]
+  },
+  "P2pmsVPCPrivateSubnet1SubnetA41A2856": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet1RouteTable61CD3A07": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet1RouteTableAssociationAE0DCB98": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPrivateSubnet1RouteTable61CD3A07"
+    },
+    "SubnetId": {
+     "Ref": "P2pmsVPCPrivateSubnet1SubnetA41A2856"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet1DefaultRoute2313DE20": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "P2pmsVPCPublicSubnet1NATGateway3AA15B67"
+    },
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPrivateSubnet1RouteTable61CD3A07"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet2Subnet0B6BD42E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet2RouteTable9AB9B020": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/P2pmsVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet2RouteTableAssociation66752BC3": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPrivateSubnet2RouteTable9AB9B020"
+    },
+    "SubnetId": {
+     "Ref": "P2pmsVPCPrivateSubnet2Subnet0B6BD42E"
+    }
+   }
+  },
+  "P2pmsVPCPrivateSubnet2DefaultRoute96ABDAFF": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "P2pmsVPCPublicSubnet2NATGatewayC8667B37"
+    },
+    "RouteTableId": {
+     "Ref": "P2pmsVPCPrivateSubnet2RouteTable9AB9B020"
+    }
+   }
+  },
+  "P2pmsVPCIGWA6AB69F6": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "P2pmsVPC"
+     }
+    ]
+   }
+  },
+  "P2pmsVPCVPCGWA8333946": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "P2pmsVPCIGWA6AB69F6"
+    },
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "AuthServiceDBSubnetGroupCFE5A552": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for AuthServiceDB database",
+    "SubnetIds": [
+     {
+      "Ref": "P2pmsVPCPrivateSubnet1SubnetA41A2856"
+     },
+     {
+      "Ref": "P2pmsVPCPrivateSubnet2Subnet0B6BD42E"
+     }
+    ]
+   }
+  },
+  "AuthServiceDBSecurityGroupBE6D28EB": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for AuthServiceDB database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"admin_user\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "AuthServiceDBSecretAttachmentF30406A9": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb"
+    },
+    "TargetId": {
+     "Ref": "AuthServiceDBC6B688BA"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   }
+  },
+  "AuthServiceDBC6B688BA": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "20",
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t2.micro",
+    "DBName": "p2pms-auth-service-db",
+    "DBSubnetGroupName": {
+     "Ref": "AuthServiceDBSubnetGroupCFE5A552"
+    },
+    "Engine": "postgres",
+    "EngineVersion": "17.2",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": "admin_user",
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "AuthServiceDBSecurityGroupBE6D28EB",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PatientServiceDBSubnetGroupCED49D16": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for PatientServiceDB database",
+    "SubnetIds": [
+     {
+      "Ref": "P2pmsVPCPrivateSubnet1SubnetA41A2856"
+     },
+     {
+      "Ref": "P2pmsVPCPrivateSubnet2Subnet0B6BD42E"
+     }
+    ]
+   }
+  },
+  "PatientServiceDBSecurityGroup6B97C0E5": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for PatientServiceDB database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  },
+  "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"admin_user\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "PatientServiceDBSecretAttachment90D77B03": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb"
+    },
+    "TargetId": {
+     "Ref": "PatientServiceDBB84F9BF9"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   }
+  },
+  "PatientServiceDBB84F9BF9": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "20",
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t2.micro",
+    "DBName": "p2pms-patient-service-db",
+    "DBSubnetGroupName": {
+     "Ref": "PatientServiceDBSubnetGroupCED49D16"
+    },
+    "Engine": "postgres",
+    "EngineVersion": "17.2",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": "admin_user",
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "PatientServiceDBSecurityGroup6B97C0E5",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "AuthServiceDBHealthCheck": {
+   "Type": "AWS::Route53::HealthCheck",
+   "Properties": {
+    "HealthCheckConfig": {
+     "FailureThreshold": 3,
+     "IPAddress": {
+      "Fn::GetAtt": [
+       "AuthServiceDBC6B688BA",
+       "Endpoint.Address"
+      ]
+     },
+     "Port": {
+      "Fn::GetAtt": [
+       "AuthServiceDBC6B688BA",
+       "Endpoint.Port"
+      ]
+     },
+     "RequestInterval": 30,
+     "Type": "TCP"
+    }
+   }
+  },
+  "PatientServiceDBHealthCheck": {
+   "Type": "AWS::Route53::HealthCheck",
+   "Properties": {
+    "HealthCheckConfig": {
+     "FailureThreshold": 3,
+     "IPAddress": {
+      "Fn::GetAtt": [
+       "PatientServiceDBB84F9BF9",
+       "Endpoint.Address"
+      ]
+     },
+     "Port": {
+      "Fn::GetAtt": [
+       "PatientServiceDBB84F9BF9",
+       "Endpoint.Port"
+      ]
+     },
+     "RequestInterval": 30,
+     "Type": "TCP"
+    }
+   }
+  },
+  "MskCluster": {
+   "Type": "AWS::MSK::Cluster",
+   "Properties": {
+    "BrokerNodeGroupInfo": {
+     "BrokerAZDistribution": "DEFAULT",
+     "ClientSubnets": [
+      {
+       "Ref": "P2pmsVPCPrivateSubnet1SubnetA41A2856"
+      },
+      {
+       "Ref": "P2pmsVPCPrivateSubnet2Subnet0B6BD42E"
+      }
+     ],
+     "InstanceType": "kafka.m5.xlarge"
+    },
+    "ClusterName": "p2pms-kafka-cluster",
+    "KafkaVersion": "2.8.0",
+    "NumberOfBrokerNodes": 1
+   }
+  },
+  "P2pmsClusterD56DCFA2": {
+   "Type": "AWS::ECS::Cluster"
+  },
+  "P2pmsClusterDefaultServiceDiscoveryNamespace562AD318": {
+   "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+   "Properties": {
+    "Name": "patient-management.local",
+    "Vpc": {
+     "Ref": "P2pmsVPC332F52F5"
+    }
+   }
+  }
+ }
+}

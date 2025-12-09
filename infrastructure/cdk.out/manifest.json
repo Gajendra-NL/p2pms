@@ -11,6 +11,236 @@
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}"
       },
+      "metadata": {
+        "/localstack/P2pmsVPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPC332F52F5"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet1SubnetF36757D0"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet1RouteTableFC2810A1"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet1RouteTableAssociation7019616D"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet1DefaultRoute03867C94"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet1EIP3A2CAF38"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet1NATGateway3AA15B67"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet2Subnet9A834429"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet2RouteTable27365DDA"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet2RouteTableAssociationAEB875BC"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet2DefaultRouteA9D39A92"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet2EIP2C11E811"
+          }
+        ],
+        "/localstack/P2pmsVPC/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPublicSubnet2NATGatewayC8667B37"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet1SubnetA41A2856"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet1RouteTable61CD3A07"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet1RouteTableAssociationAE0DCB98"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet1DefaultRoute2313DE20"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet2Subnet0B6BD42E"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet2RouteTable9AB9B020"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet2RouteTableAssociation66752BC3"
+          }
+        ],
+        "/localstack/P2pmsVPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCPrivateSubnet2DefaultRoute96ABDAFF"
+          }
+        ],
+        "/localstack/P2pmsVPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCIGWA6AB69F6"
+          }
+        ],
+        "/localstack/P2pmsVPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsVPCVPCGWA8333946"
+          }
+        ],
+        "/localstack/AuthServiceDB/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBSubnetGroupCFE5A552"
+          }
+        ],
+        "/localstack/AuthServiceDB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBSecurityGroupBE6D28EB"
+          }
+        ],
+        "/localstack/AuthServiceDB/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "localstackAuthServiceDBSecretE93C53FD3fdaad7efa858a3daf9490cf0a702aeb"
+          }
+        ],
+        "/localstack/AuthServiceDB/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBSecretAttachmentF30406A9"
+          }
+        ],
+        "/localstack/AuthServiceDB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBC6B688BA"
+          }
+        ],
+        "/localstack/PatientServiceDB/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBSubnetGroupCED49D16"
+          }
+        ],
+        "/localstack/PatientServiceDB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBSecurityGroup6B97C0E5"
+          }
+        ],
+        "/localstack/PatientServiceDB/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "localstackPatientServiceDBSecret20E0A9443fdaad7efa858a3daf9490cf0a702aeb"
+          }
+        ],
+        "/localstack/PatientServiceDB/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBSecretAttachment90D77B03"
+          }
+        ],
+        "/localstack/PatientServiceDB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBB84F9BF9"
+          }
+        ],
+        "/localstack/AuthServiceDBHealthCheck": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthServiceDBHealthCheck"
+          }
+        ],
+        "/localstack/PatientServiceDBHealthCheck": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PatientServiceDBHealthCheck"
+          }
+        ],
+        "/localstack/MskCluster": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MskCluster"
+          }
+        ],
+        "/localstack/P2pmsCluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsClusterD56DCFA2"
+          }
+        ],
+        "/localstack/P2pmsCluster/DefaultServiceDiscoveryNamespace/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "P2pmsClusterDefaultServiceDiscoveryNamespace562AD318"
+          }
+        ]
+      },
       "displayName": "localstack"
     },
     "Tree": {
